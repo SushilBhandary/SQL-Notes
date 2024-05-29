@@ -10,15 +10,10 @@
 
 ## Self Join
 
+A self join is a join where we are joining a table with itself. In the above query, we are joining the `students` table with itself. In a self joining, aliasing tables is very important. If we don't alias the tables, then SQL will not know which row of the table to match with which row of the same table (because both of them have same names as they are the same table only).
+
 Let's say at Scaler, for every student we assign a Buddy. For this we have a `students` table, which looks as follows:
 
-`id | name | buddy_id`
-
-This `buddy_id` will be an id of what?
-
-Correct. Now, let's say we have to print for every student, their name and their buddy's name. How will we do that? Here 2 rows of which tables would we want to stitch together to get this data?
-
-Correct, an SQL query for the same shall look like:
 
 ```sql
 SELECT s1.name, s2.name
@@ -27,7 +22,6 @@ JOIN students s2
 ON s1.buddy_id = s2.id;
 ```
 
-This is an example of SELF join. A self join is a join where we are joining a table with itself. In the above query, we are joining the `students` table with itself. In a self joining, aliasing tables is very important. If we don't alias the tables, then SQL will not know which row of the table to match with which row of the same table (because both of them have same names as they are the same table only).
 
 ### SQL query as pseudocode
 
@@ -56,13 +50,9 @@ for row in ans:
     print(row.name, row.name)
 ```
 
-## More problems on JOIN
+## Joining multiple tables
 
-### Joining multiple tables
-
-Till now, we had only joined 2 tables. But what if we want to join more than 2 tables? Let's say we want to print the name of every film, along with the name of the language and the name of the original language. How can we do that? If you have to add 3 numbers, how do you do that?
-
-To get the name of the language, we would first want to combine film and language table over the `language_id` column. Then, we would want to combine the result of that with the language table again over the `original_language_id` column. This is how we can do that:
+Till now, we had only joined 2 tables. 
 
 ```sql
 SELECT f.title, l1.name, l2.name
@@ -92,9 +82,7 @@ for row in ans:
     print(row.name, row.language_name, row.original_language_name)
 ```
 
-### Joins with multiple conditions in ON clause
-
-Till now, whenever we did a join, we joined based on only 1 condition. Like in where clause we can combine multiple conditions, in Joins as well, we can have multiple conditions.
+## Joins with multiple conditions in ON clause
 
 Let's see an example. For every film, name all the films that were released in the range of 2 years before or after that film and there rental rate was more than the rate of the movie.
 
@@ -104,13 +92,6 @@ FROM film f1
 JOIN film f2
 ON (f2.year BETWEEN f1.year - 2 AND f1.year + 2) AND f2.rental > f1.rental;
 ```
-
-> Note:
-> 1. Join does not need to happen on equality of columns always.
-> 2. Join can also have multiple conditions.
-
-A Compound Join is one where Join has multiple conditions on different columns.
-
 
 ## Inner vs Outer Joins
 
@@ -138,12 +119,14 @@ ON s1.buddy_id = s2.id
 
 The keyword INNER is optional. By default a join is INNER join.
 
-As you see, an INNER JOIN doesn't include a row that didn't match the condition for any combination.
+### Type of Joins
 
-Opposite of INNER JOIN is OUTER JOIN. Outer Join will include all rows, even if they don't match the condition. There are 3 types of outer joins:
-- Left Join
-- Right Join
-- Full Join
+- INNER JOIN 
+- Outer Join
+    1. Left Join
+    2. Right Join
+    3. Full Join
+
 
 As the names convey, left join will include all rows from the left table, right join will include all rows from the right table and full join will include all rows from both the tables.
 
@@ -260,7 +243,7 @@ SELECT *
 FROM A, B
 WHERE A.id = B.id;
 ```
-The above query is nothing but a CROSS JOIN behind the scenes which can be written as:
+The above query is nothing but a `CROSS JOIN` behind the scenes which can be written as:
 
 ```sql
 SELECT *
