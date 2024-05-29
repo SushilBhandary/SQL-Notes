@@ -58,6 +58,46 @@ INSERT INTO film
 VALUES (default, 'The Dark Knight', 'Batman fights the Joker', 2008, 1, NULL, 3, 4.99, 152, 19.99, 'PG-13', 'Trailers', default);
 ```
 
+### ALTER TABLE
+
+`ADD Column`
+To add a column in a table, use the following syntax:
+```
+ALTER TABLE table_name
+ADD column_name datatype;
+```
+
+Example:
+```
+ALTER TABLE Customers
+ADD Email varchar(255);
+```
+`DROP COLUMN`
+
+```
+ALTER TABLE table_name
+DROP COLUMN column_name;
+```
+Example:
+```
+ALTER TABLE Customers
+DROP COLUMN Email;
+```
+
+`RENAME COLUMN`
+
+```
+ALTER TABLE table_name
+RENAME COLUMN old_name to new_name;
+```
+
+`ALTER/MODIFY DATATYPE`
+
+```
+ALTER TABLE table_name
+MODIFY COLUMN column_name datatype;
+```
+
 ## Read
 
 `SELECT` statement is used to read data from a table.
