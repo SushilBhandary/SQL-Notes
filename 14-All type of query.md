@@ -120,7 +120,7 @@ sum(o.product_name="Eggs") = 0
 order by customer_name
 ```
 
-### SUB QUERY
+### SUB QUERY`
 ```
 SELECT *
 from employees
